@@ -1,0 +1,186 @@
+<html> 
+	<!-- mapping violence --> 
+	<head> 
+		<!-- css --> 
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css">
+		<link rel="stylesheet" href="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
+
+		<!-- fonts --> 
+		<link href="https://fonts.googleapis.com/css?family=Crimson+Text|Fjalla+One" rel="stylesheet">
+
+		<!-- jQuery -->
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	    <script src="js/jquery.animate-colors.js"></script>
+
+	    <!-- js --> 
+	   	<script src="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+	</head> 
+
+	<body> 
+		
+		<div id="coverPage" class="container-fluid">
+			<div id="blackOverlay" class="col-md-12 col-sm-12"> </div> 
+			<div id="infoPanel" class="col-md-8 col-sm-10"> 
+			 	<h1 class="title"> MAPPING VIOLENCE </h1> 
+			 	<div class="buttons"> 
+			 		<button type="button" class="btn btn-primary">intro</button>
+			 		<button type="button" class="btn btn-primary">how to use this map</button>
+			 		<button type="button" class="btn btn-primary">about</button>
+			 	</div> 
+			 	<div id="introduction" class="infoScroll"> 
+			 		<p> Some of the worst racial violence in United States history took place along the Mexico-Texas border from 1910 to 1920. </p> 
+
+					<p>The dead included women and men, the aged and the young, long-time residents and recent arrivals.  They were killed by strangers, sometimes by neighbors, some by vigilantes and other times at the hands of local law enforcement officers or Texas Rangers.  Some were summarily executed after being taken captive, or shot under the flimsy pretext of trying to escape.  Some were left in the open to rot, others desecrated by being burnt, being decapitated, or revealing evidence of other forms of torture and violation such as having beer bottles rammed into their mouths. Extralegal executions became so common that a San Antonio reporter observed that “finding of dead bodies of Mexicans, suspected for various reasons of being connected with the troubles, has reached a point where it creates little or no interest.  It is only when a raid is reported or an American is killed that the ire of the people is aroused.” </p> 
+
+					<p> Terror spread far beyond the ranks of those killed.  “One or more of us may have incurred the displeasure of some one, and it seems only necessary for that some one to whisper our names to an officer, to have us imprisoned and killed without an opportunity to prove in a fair trial, the falsity of the charges against us,” pleaded residents of Kingsville in a telegram to President Woodrow Wilson in 1916.  “[S]ome of us who sign this petition, may be killed without even knowing the name of him who accuses.  Our privileged denunciators may continue their infamous proceedings — answerable to no one.” </p> 
+
+					<p> Far from being surreptitious, the violence was welcomed, celebrated, and even instigated at the highest levels of society and government.  As decapitated bodies floated down the Rio Grande and thousands fled to Mexico, one Texas paper spoke of “a serious surplus population that needs eliminating.”  Prominent politicians proposed putting all those of Mexican descent into “concentration camps” – and killing any who refused.  For a decade, people would come across skeletons in the south Texas brush, marked with execution-style bullet holes in the backs of their skulls. </p> 
+
+					<p> The true toll will never be known, though scholars from the 1930s to the present have given estimates of from several hundred to five thousand killed. </p> 
+			 	</div> 
+			 	<div id="howToUseCover" class="infoScroll hidden"> 
+			 		<p> write up a "how to use" section </p> 
+			 	</div> 
+			 	<div id="howToUseSmall" class="smallPanel hidden"> 
+			 		<h1> HOW TO USE THIS MAP </hi> 
+			 		<p> Each dot represents an incidence of violence </p> 
+			 		<p> Click a dot to learn more about an incident </p> 
+			 	</div> 
+			 	<button type="button" id="slideLeft" class="btn btn-link">slide</button>
+			</div> 
+			<div id="mapid"> </div>
+		</div> 
+
+
+	</body> 
+
+	<!-- TODO: put in separate doc --> 
+	<style> 
+		body { 
+			font-family: 'Crimson Text', serif;
+			-webkit-font-smoothing: antialiased;
+		}
+
+		h1 {
+			font-family: 'Fjalla One', sans-serif;  
+		}
+
+		#mapid {
+			height: 100%; 
+		/*	position: absolute; */
+			z-index: 0; 
+		}
+
+		#coverPage { 
+			width:100%;
+			padding-left: 0px; 
+			padding-right: 0px;
+			position: relative;
+			z-index: 5; 
+		}
+
+		#blackOverlay { 
+			position: absolute;
+			height: 100%;
+			z-index: 5; 
+			background-color: #252120; 
+			opacity: 0.7; 
+		}
+
+		#infoPanel { 
+			height: 100%;
+			position: absolute;
+			z-index: 6; 
+			background-color: #252120; 
+			color: #ffffff;
+		}
+
+		.infoScroll { 
+			width:700px;
+			height:60%;
+			overflow:auto;
+			background-color: #252120;
+			color:white;
+			font-family: 'Crimson Text', serif;
+			font-size: 16pt;
+			margin-top:20px;
+			padding-left: 100px; 
+			padding-right: 10px;
+		}
+
+		#slideLeft { 
+			position: absolute;
+			right: 0px;
+			vertical-align: middle;
+			top: 50%;
+		}
+
+		.title { 
+			font-family: 'Fjalla One', sans-serif;
+			padding-top: 30px; 
+			padding-left: 50px; 
+			font-size: 85pt; 
+		}
+
+		.buttons { 
+			padding-left: 100px;
+			font-family: 'Fjalla One', sans-serif; 
+		}
+
+		.smallPanel { 
+			color: #252120;
+		}
+	</style> 
+
+	<!-- TODO: put in separate doc --> 
+	<script> 
+		var mymap = L.map('mapid').setView([27.4779, -99.5496], 8);
+		L.tileLayer('https://api.mapbox.com/styles/v1/ejiao/cirpbdjyr0024g8nflf48lzs6/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiZWppYW8iLCJhIjoiY2lycGJjdWc1MGV6ZGZhbThkOXNwNWNqbSJ9.JmvgWwuCzvSBa5ieYUXWtw', {
+			attribution: "Map data &copy; © <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a>'", 
+		    maxZoom: 18,
+		    id: 'ejiao.139c2pig',
+		    accessToken: 'pk.eyJ1IjoiZWppYW8iLCJhIjoiY2lycGJjdWc1MGV6ZGZhbThkOXNwNWNqbSJ9.JmvgWwuCzvSBa5ieYUXWtw'
+		}).addTo(mymap);
+
+		/* defining our red dot map marker */
+		var redDot = L.icon({
+		    iconUrl: 'red_circle.png',
+		    shadowUrl: '',
+
+		    iconSize:     [10, 10], // size of the icon
+		    shadowSize:   [0, 0], // size of the shadow
+		    iconAnchor:   [5, 5], // point of the icon which will correspond to marker's location
+		    shadowAnchor: [0, 0],  // the same for the shadow
+		    popupAnchor:  [5, 5] // point from which the popup should open relative to the iconAnchor
+		});
+
+		function loadMarkers() {
+			var marker1 = L.marker([27.4779, -99.496], {icon: redDot}).addTo(mymap);
+			var marker2 = L.marker([27.2, -98.5496], {icon: redDot}).addTo(mymap);
+			var marker3 = L.marker([27.429, -98.246], {icon: redDot}).addTo(mymap);
+			var marker4 = L.marker([27.23, -99.496], {icon: redDot}).addTo(mymap);
+			L.marker([27.23, -99.56], {icon: redDot}).addTo(mymap);
+			L.marker([27.123, -99.26], {icon: redDot}).addTo(mymap);
+			L.marker([27.123, -99.26], {icon: redDot}).addTo(mymap);
+			L.marker([26.9, -99.1], {icon: redDot}).addTo(mymap);
+			L.marker([25.9017, -97.4975], {icon: redDot}).addTo(mymap);
+			L.marker([25.9217, -97.675], {icon: redDot}).addTo(mymap);
+		}
+
+		$("#slideLeft").on("click", function() { 
+			$("#infoPanel").animate({
+		        width: '350px',
+		        opacity: '0.75',
+		        backgroundColor: '#eeeeea'
+		    }, "slow");
+			$(".title").hide();
+			$(".buttons").hide(); 
+			$(".infoScroll").hide();
+			$("#blackOverlay").fadeOut("slow");
+			$("#howToUseSmall").toggle(".hidden");
+			loadMarkers();
+		});
+	</script> 
+
+
+</html> 

@@ -1,0 +1,204 @@
+<html> 
+	<!-- mapping violence --> 
+	<head> 
+		<!-- css --> 
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css">
+		<link rel="stylesheet" href="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
+
+		<!-- fonts --> 
+		<link href="https://fonts.googleapis.com/css?family=Crimson+Text|Fjalla+One" rel="stylesheet">
+
+		<!-- jQuery -->
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	    <script src="js/jquery.animate-colors.js"></script>
+
+	    <!-- js --> 
+	   	<script src="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+	   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	   	<!-- scroll magic --> 
+	   	<script src="js/ScrollMagic.min.js"></script> 
+
+	</head> 
+
+	<body> 
+		
+		
+
+			 	<section class="panel blue">
+					<b>ONE</b>
+					<p> "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?" </p> 
+				</section>
+				<section class="panel turqoise">
+					<b>TWO</b>
+				</section>
+				<section class="panel green">
+					<b>THREE</b>
+				</section>
+				<section class="panel bordeaux">
+					<b>FOUR</b>
+				</section>
+<!-- 
+			 
+	</body> 
+
+	<!-- TODO: put in separate doc --> 
+	<style> 
+		body { 
+			font-family: 'Crimson Text', serif;
+			-webkit-font-smoothing: antialiased;
+		}
+
+		h1 {
+			font-family: 'Fjalla One', sans-serif;  
+		}
+
+		#mapid {
+			height: 100%; 
+		/*	position: absolute; */
+			z-index: 0; 
+		}
+
+		#coverPage { 
+			width:100%;
+			padding-left: 0px; 
+			padding-right: 0px;
+			position: relative;
+			z-index: 5; 
+		}
+
+		#blackOverlay { 
+			position: absolute;
+			height: 100%;
+			z-index: 5; 
+			background-color: #252120; 
+			opacity: 0.3; 
+		}
+
+		#infoPanel { 
+			height: 100%;
+			position: absolute;
+			z-index: 6; 
+			background-color: #eeeeea; 
+			color: #252120;
+			opacity: 0.9;
+		}
+
+		.infoScroll { 
+			width:600px;
+			margin: auto;
+			height:60%;
+			overflow:auto;
+			font-family: 'Crimson Text', serif;
+			font-size: 16pt;
+			margin-top:20px;
+
+		}
+
+		.panel {
+			height: 100%;
+			width: 100%;
+		}
+
+		#slideLeft { 
+			position: absolute;
+			right: 0px;
+			vertical-align: middle;
+			top: 50%;
+		}
+
+		.title { 
+			font-family: 'Fjalla One', sans-serif;
+			margin: auto; 
+			text-align: center;
+			padding-top: 20px; 
+		/*	padding-left: 50px;  */
+			font-size: 85pt; 
+		}
+
+		.buttons { 
+			padding-left: 100px;
+			font-family: 'Fjalla One', sans-serif; 
+		}
+
+		.smallPanel { 
+			color: #252120;
+		}
+	</style> 
+
+	<!-- TODO: put in separate doc --> 
+	<script> 
+
+		var mymap = L.map('mapid').setView([27.4779, -99.5496], 8);
+		L.tileLayer('https://api.mapbox.com/styles/v1/ejiao/cirpbdjyr0024g8nflf48lzs6/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiZWppYW8iLCJhIjoiY2lycGJjdWc1MGV6ZGZhbThkOXNwNWNqbSJ9.JmvgWwuCzvSBa5ieYUXWtw', {
+			attribution: "Map data &copy; © <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a>'", 
+		    maxZoom: 18,
+		    id: 'ejiao.139c2pig',
+		    accessToken: 'pk.eyJ1IjoiZWppYW8iLCJhIjoiY2lycGJjdWc1MGV6ZGZhbThkOXNwNWNqbSJ9.JmvgWwuCzvSBa5ieYUXWtw'
+		}).addTo(mymap);
+
+		/* defining our red dot map marker */
+		var redDot = L.icon({
+		    iconUrl: 'red_circle.png',
+		    shadowUrl: '',
+
+		    iconSize:     [10, 10], // size of the icon
+		    shadowSize:   [0, 0], // size of the shadow
+		    iconAnchor:   [5, 5], // point of the icon which will correspond to marker's location
+		    shadowAnchor: [0, 0],  // the same for the shadow
+		    popupAnchor:  [5, 5] // point from which the popup should open relative to the iconAnchor
+		});
+
+		function loadMarkers() {
+			var marker1 = L.marker([27.4779, -99.496], {icon: redDot}).addTo(mymap);
+			var marker2 = L.marker([27.2, -98.5496], {icon: redDot}).addTo(mymap);
+			var marker3 = L.marker([27.429, -98.246], {icon: redDot}).addTo(mymap);
+			var marker4 = L.marker([27.23, -99.496], {icon: redDot}).addTo(mymap);
+			L.marker([27.23, -99.56], {icon: redDot}).addTo(mymap);
+			L.marker([27.123, -99.26], {icon: redDot}).addTo(mymap);
+			L.marker([27.123, -99.26], {icon: redDot}).addTo(mymap);
+			L.marker([26.9, -99.1], {icon: redDot}).addTo(mymap);
+			L.marker([25.9017, -97.4975], {icon: redDot}).addTo(mymap);
+			L.marker([25.9217, -97.675], {icon: redDot}).addTo(mymap);
+		}
+
+		$(function () { // wait for document ready
+			// init
+			var controller = new ScrollMagic.Controller({
+				globalSceneOptions: {
+					triggerHook: 'onLeave'
+				}
+			});
+
+			// get all slides
+			var slides = document.querySelectorAll("section.panel");
+
+			// create scene for every slide
+			for (var i=0; i<slides.length; i++) {
+				new ScrollMagic.Scene({
+					triggerElement: slides[i]
+				})
+				.setPin(slides[i])
+				.addIndicators() // add indicators (requires plugin)
+				.addTo(controller);
+			}
+		});
+
+
+		$("#slideLeft").on("click", function() { 
+			$("#infoPanel").animate({
+		        width: '350px',
+		        opacity: '0.75',
+		        backgroundColor: '#eeeeea'
+		    }, "slow");
+			$(".title").hide();
+			$(".buttons").hide(); 
+			$(".infoScroll").hide();
+			$("#blackOverlay").fadeOut("slow");
+			$("#howToUseSmall").toggle(".hidden");
+			loadMarkers();
+		});
+	</script> 
+
+
+</html> 

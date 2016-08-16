@@ -1,0 +1,292 @@
+<html> 
+	<!-- mapping violence --> 
+	<head> 
+		<!-- css --> 
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css">
+		<link rel="stylesheet" href="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
+
+		<!-- fonts --> 
+		<link href="https://fonts.googleapis.com/css?family=Crimson+Text|Fjalla+One" rel="stylesheet">
+
+		<!-- jQuery -->
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	    <script src="js/jquery.animate-colors.js"></script>
+
+	    <!-- js --> 
+	   	<script src="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+	   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	</head> 
+
+	<body> 
+		
+		<div id="coverPage" class="container-fluid">
+
+			<!-- black transparency --> 
+			<div id="blackOverlay" class="col-md-12 col-sm-12"> </div> 
+
+			<!-- right side navbar --> 
+			<div id="navbar" class="navbar light hidden"> 
+				<ul class="nav navbar-nav"> 
+					<li><span class="glyphicon glyphicon-globe" aria-hidden="true"></span></li> 
+					<li><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></li>  
+					<li><span class="glyphicon glyphicon-search" aria-hidden="true"></span></li> 
+				</ul> 
+			</div> 
+
+			<!-- left-side info panel --> 
+			<div id="infoPanel" class="col-md-8 col-sm-10"> 
+			 	<h1 class="title"> MAPPING VIOLENCE </h1> 
+
+			 <!-- 
+			 	<div class="buttons"> 
+			 		<button type="button" class="btn btn-primary">intro</button>
+			 		<button type="button" class="btn btn-primary">how to use this map</button>
+			 		<button type="button" class="btn btn-primary">about</button>
+			 	</div>  --> 
+
+			 	<div id="introduction" class="infoScroll"> 
+			 		<p> Some of the worst racial violence in United States history took place along the Mexico-Texas border from 1910 to 1920. </p> 
+
+					<p>The dead included women and men, the aged and the young, long-time residents and recent arrivals.  They were killed by strangers, sometimes by neighbors, some by vigilantes and other times at the hands of local law enforcement officers or Texas Rangers.  Some were summarily executed after being taken captive, or shot under the flimsy pretext of trying to escape.  Some were left in the open to rot, others desecrated by being burnt, being decapitated, or revealing evidence of other forms of torture and violation such as having beer bottles rammed into their mouths.</p>
+			 	</div> 
+			 	<div id="howToUseCover" class="infoScroll hidden"> 
+			 		<p> write up a "how to use" section </p> 
+			 	</div> 
+			 	<div id="howToUseSmall" class="smallPanel hidden"> 
+			 		<h1> HOW TO USE THIS MAP </hi> 
+			 		<p> Each dot represents an incidence of violence </p> 
+			 		<p> Click a dot to learn more about an incident </p> 
+			 	</div> 
+			 	<div id="poiInfo">
+			 	</div> 
+			 	<button type="button" id="slideLeft" class="btn btn-link">slide</button>
+			</div> 
+
+			<!-- map --> 
+			<div id="mapid"> </div>
+		</div> 
+
+
+	</body> 
+
+	<!-- TODO: put in separate doc --> 
+	<style> 
+		body { 
+			font-family: 'Crimson Text', serif;
+			-webkit-font-smoothing: antialiased;
+			font-size: 12pt; 
+		}
+
+		h1 {
+			font-family: 'Fjalla One', sans-serif;  
+		}
+
+		#mapid {
+			height: 100%; 
+		/*	position: absolute; */
+			z-index: 0; 
+		}
+
+		#coverPage { 
+			width:100%;
+			padding-left: 0px; 
+			padding-right: 0px;
+			position: relative;
+			z-index: 5; 
+		}
+
+		#blackOverlay { 
+			position: absolute;
+			height: 100%;
+			z-index: 5; 
+			background-color: #252120; 
+			opacity: 0.3; 
+		}
+
+		#slideLeft { 
+			position: absolute;
+			right: 0px;
+			vertical-align: middle;
+			top: 50%;
+		}
+
+		#navbar { 
+			background: #eeeeea; 
+			position: absolute;
+			color: #252120;
+			top: 0px;
+			right: 0px;
+			z-index: 5;
+		}
+
+		#navbar ul { 
+			height: 50px;
+		}
+
+		#navbar li { 
+			position: relative;
+			margin-right: 20px; 
+			margin-left: 20px;
+			top: 50%;
+ 			transform: translateY(-50%);
+		}
+
+		#infoPanel { 
+			height: 100%;
+			position: absolute;
+			z-index: 6; 
+			background-color: #eeeeea; 
+			color: #252120;
+			opacity: 0.9;
+		}
+
+		.infoScroll { 
+			width:600px;
+			margin: auto;
+			height:60%;
+			overflow:auto;
+			font-family: 'Crimson Text', serif;
+			font-size: 16pt;
+			margin-top:20px;
+
+		}
+
+		.glyphicon { 
+			font-size: 25px; 
+		}
+
+		.light { 
+			background: #eeeeea; 
+			opacity: .75;
+		}
+
+		.panel {
+			height: 100%;
+			width: 100%;
+		}
+
+		.leaflet-popup-content-wrapper {
+		    background: #252120;
+		    color: #eeeeea;
+		    opacity: 0.9;
+		    box-shadow: 0 3px 14px rgba(255,255,255,0.4);
+		}
+		.leaflet-popup-content-wrapper {
+		    border-radius: 0px;
+		}
+		.leaflet-popup-content {
+		    padding: 6px;
+		}
+
+		.leaflet-popup-tip {
+	        background: #252120;
+	        opacity: 0.9;
+	    }
+
+
+		.title { 
+			font-family: 'Fjalla One', sans-serif;
+			margin: auto; 
+			text-align: center;
+			padding-top: 20px; 
+		/*	padding-left: 50px;  */
+			font-size: 85pt; 
+		}
+
+		.buttons { 
+			padding-left: 100px;
+			font-family: 'Fjalla One', sans-serif; 
+		}
+
+		.smallPanel { 
+			color: #252120;
+		}
+
+	</style> 
+
+	<!-- TODO: put in separate doc --> 
+	<script> 
+
+
+		$(document).ready(function() { 
+
+			// init map 
+			var mymap = L.map('mapid').setView([28.667, -103.5], 7);
+			L.tileLayer('https://api.mapbox.com/styles/v1/ejiao/cirpbdjyr0024g8nflf48lzs6/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiZWppYW8iLCJhIjoiY2lycGJjdWc1MGV6ZGZhbThkOXNwNWNqbSJ9.JmvgWwuCzvSBa5ieYUXWtw', {
+				attribution: "Map data &copy; © <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a>'", 
+			    maxZoom: 18,
+			    id: 'ejiao.139c2pig',
+			    accessToken: 'pk.eyJ1IjoiZWppYW8iLCJhIjoiY2lycGJjdWc1MGV6ZGZhbThkOXNwNWNqbSJ9.JmvgWwuCzvSBa5ieYUXWtw',
+			}).addTo(mymap);
+
+			mymap.zoomControl.setPosition('bottomright'); 
+
+			/* defining our red dot map marker */
+			var redDot = L.icon({
+			    iconUrl: 'red_circle.png',
+			    shadowUrl: '',
+
+			    iconSize:     [10, 10], // size of the icon
+			    shadowSize:   [0, 0], // size of the shadow
+			    iconAnchor:   [5, 5], // point of the icon which will correspond to marker's location
+			    shadowAnchor: [0, 0],  // the same for the shadow
+			    popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
+			});
+
+			function loadMarkers(data) {
+				$(data).each(function(poi) {
+					console.log(data[poi]);
+					console.log(data[poi].location.coordinates);
+					var marker = L.marker([data[poi].location.coordinates[1], data[poi].location.coordinates[0]], {icon: redDot}).addTo(mymap);
+					marker.bindPopup("<b>" + data[poi].title + "</b>");
+					$(marker).on("mouseover", function() {
+						marker.openPopup(); 
+					});
+					$(marker).on("mouseout", function() {
+						marker.closePopup(); 
+					});
+
+					$(marker).on("click", function() { 
+						console.log("click");
+						$("#poiInfo").hide(); 
+						$("#poiInfo").html(
+							"<h1>" + data[poi].title + "</h1>" + 
+							"<p>" + data[poi].description +"</p>"
+							);
+						$("#poiInfo").fadeIn();
+					});
+
+				});
+			} 
+
+			$.get( "http://private-817eec-mappingracialviolencedatabaseapiv090.apiary-mock.com/pois", function( data ) { 
+					console.log(data);
+				  loadMarkers(data); 
+				});
+
+			$("#slideLeft").on("click", function() { 
+				$("#infoPanel").animate({
+			        width: '350px',
+			        opacity: '0.75',
+			        backgroundColor: '#eeeeea'
+			    }, "slow");
+				$(".title").hide();
+				$(".buttons").hide(); 
+				$(".infoScroll").hide();
+				$("#slideLeft").hide();
+				$("#blackOverlay").fadeOut("slow");
+				$("#poiInfo").show(); 
+
+				$("#navbar").hide(); 
+				$("#navbar").toggleClass("hidden");
+				$("#navbar").fadeIn(); 
+			//	showMarkers();
+			});
+		}); 
+
+		
+	</script> 
+
+
+</html> 
