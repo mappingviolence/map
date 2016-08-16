@@ -28,9 +28,29 @@
 			<!-- right side navbar --> 
 			<div id="navbar" class="navbar light hidden"> 
 				<ul class="nav navbar-nav"> 
-					<li><span class="glyphicon glyphicon-globe" aria-hidden="true"></span></li> 
-					<li><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></li>  
-					<li><span class="glyphicon glyphicon-search" aria-hidden="true"></span></li> 
+					<li>
+						<button type="button" class="btn btn-link">
+							<span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+						</button>
+					</li> 
+					<li>
+						<button type="button" class="btn btn-link">
+							<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+						</button>
+					</li>
+					
+					<form id="search" class="navbar-form navbar-left hidden">
+				        <div class="form-group">
+				          <input type="text" class="form-control" placeholder="Search">
+				        </div>
+				        <button type="submit" class="btn btn-default">Submit</button>
+				    </form> 
+					<li>	
+						<button id="searchIcon" type="button" class="btn btn-link">
+							<span  class="glyphicon glyphicon-search" aria-hidden="true"></span>
+						</button> 
+						
+					</li> 
 				</ul> 
 			</div> 
 
@@ -154,6 +174,7 @@
 
 		.glyphicon { 
 			font-size: 25px; 
+			color: #252120;
 		}
 
 		.light { 
@@ -236,8 +257,6 @@
 
 			function loadMarkers(data) {
 				$(data).each(function(poi) {
-					console.log(data[poi]);
-					console.log(data[poi].location.coordinates);
 					var marker = L.marker([data[poi].location.coordinates[1], data[poi].location.coordinates[0]], {icon: redDot}).addTo(mymap);
 					marker.bindPopup("<b>" + data[poi].title + "</b>");
 					$(marker).on("mouseover", function() {
@@ -248,7 +267,6 @@
 					});
 
 					$(marker).on("click", function() { 
-						console.log("click");
 						$("#poiInfo").hide(); 
 						$("#poiInfo").html(
 							"<h1>" + data[poi].title + "</h1>" + 
@@ -280,8 +298,12 @@
 
 				$("#navbar").hide(); 
 				$("#navbar").toggleClass("hidden");
-				$("#navbar").fadeIn(); 
+				$("#navbar").fadeIn("slow"); 
 			//	showMarkers();
+			});
+
+			$("#searchIcon").on("click", function() { 
+				$("#search").toggleClass("hidden");
 			});
 		}); 
 
