@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<!-- Ben wrote this as a replacement for the default bootstrap tooltip -->
+<html>
+<head>
+    <title>MFEE</title>
+
+    <link rel="stylesheet" type="text/css" href="css/tooltip.css">
+
+    
+
+    <!-- Latest compiled and minified CSS -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> -->
+
+    <!-- Optional theme -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <!-- <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> -->
+
+
+</head>
+
+<body>
+    <nav class="menu">
+        <ul class="items">
+            <li><a href="#" title="Timeline">Timeline</a></li>
+            <li><a href="#" title="Tours">Tours</a></li>
+            <li><a href="#" title="Filter">Filter</a></li>
+        </ul>
+    </nav>
+
+    <div class="tooltip">
+        <p>This is a small Tooltip with the Classname 'Tooltip'</p>
+    </div>
+
+    <div class="space">
+        
+    </div>
+
+    <script>
+
+        function simple_tooltip(target_items, name){
+         $(target_items).each(function(i){
+                $("body").append("<div class='"+name+"' id='"+name+i+"'><p>"+$(this).attr('title')+"</p></div>");
+                var my_tooltip = $("#"+name+i);
+
+                $(this).removeAttr("title").mouseover(function(){
+                        my_tooltip.css({opacity:1, display:"none"}).fadeIn(400);
+                }).mousemove(function(kmouse){
+                        my_tooltip.css({left:kmouse.pageX - ($(this).width())/2 - 15, top:kmouse.pageY+25});
+                }).mouseout(function(){
+                        my_tooltip.fadeOut(400);
+                });
+            });
+        }
+
+        $(document).ready(function(){
+             simple_tooltip("a","tooltip");
+        });
+
+    </script>
+</body>
+<html>

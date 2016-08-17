@@ -1,0 +1,143 @@
+body { 
+	font-family: 'Crimson Text', serif;
+	-webkit-font-smoothing: antialiased;
+	font-size: 12pt; 
+}
+
+h1 {
+	font-family: 'Fjalla One', sans-serif;  
+}
+
+#mapid {
+	height: 100%; 
+/*	position: absolute; */
+	z-index: 0; 
+}
+
+#coverPage { 
+	width:100%;
+	padding-left: 0px; 
+	padding-right: 0px;
+	position: relative;
+	z-index: 5; 
+}
+
+#blackOverlay { 
+	position: absolute;
+	height: 100%;
+	z-index: 5; 
+	background-color: #252120; 
+	opacity: 0.3; 
+}
+
+#slideLeft { 
+	position: absolute;
+	right: 0px;
+	vertical-align: middle;
+	top: 50%;
+}
+
+#poiInfo {
+	padding: 20px; 
+	overflow:auto;
+	height: 95%;
+}
+
+#navbar { 
+	background: #eeeeea; 
+	position: absolute;
+	color: #252120;
+	top: 0px;
+	right: 0px;
+	z-index: 5;
+}
+
+#navbar ul { 
+	height: 50px;
+}
+
+#navbar li { 
+	position: relative;
+	margin-right: 20px; 
+	margin-left: 20px;
+	top: 50%;
+		transform: translateY(-50%);
+}
+
+#navbar .button { 
+	position: absolute;
+}
+
+#infoPanel { 
+	height: 100%;
+	position: absolute;
+	z-index: 6; 
+	background-color: #eeeeea; 
+	color: #252120;
+	opacity: 0.9;
+}
+
+.infoScroll { 
+	width:600px;
+	margin: auto;
+	height:60%;
+	overflow:auto;
+	font-family: 'Crimson Text', serif;
+	font-size: 16pt;
+	margin-top:20px;
+
+}
+
+.glyphicon { 
+	font-size: 25px; 
+	color: #252120;
+}
+
+.light { 
+	background: #eeeeea; 
+	opacity: .75;
+}
+
+.panel {
+	height: 100%;
+	width: 100%;
+}
+
+.leaflet-popup-content-wrapper {
+    background: #252120;
+    color: #eeeeea;
+    opacity: 0.9;
+    box-shadow: 0 3px 14px rgba(255,255,255,0.4);
+}
+.leaflet-popup-content-wrapper {
+    border-radius: 0px;
+}
+.leaflet-popup-content {
+    padding: 6px;
+}
+
+.leaflet-popup-tip {
+    background: #252120;
+    opacity: 0.9;
+}
+
+
+.title { 
+	font-family: 'Fjalla One', sans-serif;
+	margin: auto; 
+	text-align: center;
+	padding-top: 60px; 
+/*	padding-left: 50px;  */
+	font-size: 85pt; 
+}
+
+.buttons { 
+	padding-left: 100px;
+	font-family: 'Fjalla One', sans-serif; 
+}
+
+.smallInfoPanel { 
+	width: 350px;
+    opacity: 0.75;
+    background: #eeeeea;
+}
