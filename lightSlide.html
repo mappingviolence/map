@@ -33,19 +33,19 @@
 			<!-- right side navbar --> 
 			<div id="navbar" class="navbar light hidden"> 
 				<ul class="nav navbar-nav"> 
-					<li  title="about this project">
-						<button id="infoButton" type="button" class="btn btn-link">
+					<li >
+						<button id="infoButton" type="button" class="btn btn-link" title="about this project">
 							<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
 						</button>
 					</li> 			
-					<li title="tours">
-						<button type="button" class="btn btn-link">
+					<li>
+						<button type="button" class="btn btn-link" title="tours">
 							<span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
 						</button>
 					</li> 
 					<li>
-						<button type="button" class="btn btn-link">
-							<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+						<button type="button" class="btn btn-link" title="filters">
+							<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
 						</button>
 					</li>
 					
@@ -56,8 +56,8 @@
 				        <button id="submitSearch" type="submit" class="btn btn-default">Submit</button>
 				    </form> 
 					
-					<li  title="search">
-						<button id="searchIcon" type="button" class="btn btn-link">
+					<li>
+						<button id="searchIcon" type="button" class="btn btn-link" title="search">
 							<span  class="glyphicon glyphicon-search" aria-hidden="true"></span>
 						</button> 
 					</li> 
@@ -78,10 +78,15 @@
 			 		<p> write up a "how to use" section </p> 
 			 	</div> 
 
-			 	<div id="aboutUs" class="infoScroll hidden"> 
-			 		<h1> MAPPING VIOLENCE </h1> <p> was created in 2016 by an interdisciplinary team of undergraduate researchers at Brown University.</p> 
-
+			 	<div id="aboutUs" class="infoScroll fullHeight hidden"> 
+			 		<h1> MAPPING VIOLENCE </h1> <br /> <p>This project was created in 2016 by an interdisciplinary team of undergraduate researchers at Brown University led by Professor Monica Martinez.</p> 
+			 		<br />
+					<p> Descriptions of incidents were written by Danielle Gomez, Ricardo Jaramillo,  and Nnamdi Jogwe, and Liliana Sampedro.</p> 
+					<br />
+					<p> This database and mapping visualization were built by Cole Hansen, Edward Jiao, and Ben Vars.</p> 
+					<br /> 
 					<p>It is a project under the organization <i>Refusing to Forget</i>, which works to bring public attention to this period of violence.</p>
+
 			 	</div> 
 
 			 	<div id="howToUseSmall" class="smallPanel hidden"> 
@@ -133,7 +138,7 @@
 
 
 			// init tooltips 
-			simple_tooltip("#navbar span","tooltip");
+			simple_tooltip("#navbar button","tooltip");
 
 			// init map 
 			var mymap = L.map('mapid').setView([28.667, -103.5], 7);
